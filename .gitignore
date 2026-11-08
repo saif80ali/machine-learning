@@ -1,0 +1,22 @@
+# Environment variables and local secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environments
+env/
+venv/
+.venv/
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+
+# Jupyter-generated files
+.ipynb_checkpoints/
+
+# Local editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
