@@ -1,67 +1,79 @@
 # Machine Learning
 
-A workspace for exploring datasets, practicing data analysis, and building machine-learning projects. Each project should keep its notebooks, notes, and project-specific setup together.
+A collection of hands-on notebooks for exploring datasets, practicing data analysis, and learning machine-learning tools. Each topic has its own folder, and shared datasets belong in `assets/`.
 
-## Repository layout
+## Repository contents
 
 ```text
 Machine Learning/
-|-- assets/                       # Datasets and other shared project assets
+|-- assets/                           # Shared datasets and project assets
 |-- eda_titanic_dataset/
-|   |-- data_analysis.ipynb       # Titanic dataset exploration
-|   |-- pandas_load_sql.ipynb     # Loading and working with data using pandas/SQL
-|   `-- requirement.txt           # Dependencies for this project
+|   `-- data_analysis.ipynb           # Starter notebook for Titanic data analysis
+|-- load_data_from_sqldb/
+|   `-- pandas_load_sql.ipynb         # Read SQL query results into pandas
 |-- .gitignore
-`-- README.md
+|-- README.md
+`-- requirements.txt                 # Python packages used by the notebooks
 ```
 
-Add a folder for each new dataset or analysis so its notebooks and documentation stay organized. Keep datasets in `assets/` when they are shared across projects; project-specific data can live in that project's folder.
+## Set up the Python environment
 
-## Getting started
+These instructions use one virtual environment at the repository root. From the repository directory, run the following in a PowerShell terminal:
 
-1. Clone the repository and open it in your editor.
-2. Create and activate a virtual environment in the project folder. For example, from the repository root:
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
 
-   ```powershell
-   py -m venv eda_titanic_dataset\.venv
-   .\eda_titanic_dataset\.venv\Scripts\Activate.ps1
+If PowerShell prevents environment activation, you can install packages without activating it:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+## Choose the notebook kernel in VS Code
+
+1. Open a notebook (`.ipynb`) in VS Code.
+2. Select **Select Kernel** in the upper-right corner.
+3. Choose **Python Environments**, then choose the interpreter inside this repository's `.venv` folder. It may appear as `.venv (Python 3.x)`.
+4. If `.venv` is not listed, choose **Enter interpreter path** and select `.venv\Scripts\python.exe`.
+5. Run this cell to confirm the notebook is using the expected environment:
+
+   ```python
+   import sys
+   print(sys.executable)
    ```
 
-3. Install the current project's dependencies:
+   The printed path should end with `.venv\Scripts\python.exe`.
 
-   ```powershell
-   python -m pip install -r eda_titanic_dataset\requirement.txt
-   ```
+After installing a package, restart the notebook kernel before importing it. Keep notebook dependencies in `requirements.txt` so the environment can be recreated.
 
-4. Start Jupyter and open a notebook:
+## Notebooks
 
-   ```powershell
-   jupyter notebook
-   ```
+### Titanic dataset exploration
 
-   Open `eda_titanic_dataset/data_analysis.ipynb` or `eda_titanic_dataset/pandas_load_sql.ipynb`.
+Open `eda_titanic_dataset/data_analysis.ipynb` to start the Titanic exploratory data analysis project. Add its dataset and analysis steps as the project develops.
 
-Use the dependency file belonging to a project when setting up other projects. Add or update that project's dependency file when introducing new packages.
+### Loading SQL data with pandas
 
-## Datasets and responsible use
+Open `load_data_from_sqldb/pandas_load_sql.ipynb` to connect to a local MySQL database, query the `customers` table, and load query results into a pandas DataFrame.
 
-- Include only datasets you are permitted to share; check the source, license, attribution requirements, and any privacy restrictions.
-- Avoid committing private, sensitive, or very large data. Use an approved data-hosting service for files that should not live in Git, and document how to obtain them.
-- Keep original data unchanged where practical. Put cleaned or generated data in a clearly named subfolder and document how it was produced.
-- Do not put credentials or other secrets in notebooks or datasets.
+This notebook expects a MySQL server and an `ecommerce_training` database with a `customers` table. Update the connection settings in the notebook to match your local database. Do not commit passwords or other credentials.
 
-## Local configuration
+## Working with datasets
 
-Git ignores `.env` files and Python virtual-environment folders. If a project needs environment variables, create a local `.env` file and keep it out of Git. Share the variable names (not secret values) in `.env.example`.
+- Check the source, license, attribution requirements, and privacy restrictions before adding a dataset.
+- Put small, shareable datasets used by multiple projects in `assets/`; keep project-specific data with that project.
+- Do not commit private, sensitive, or very large data. Document how collaborators can obtain data that is hosted elsewhere.
+- Keep original data unchanged where practical, and describe how any cleaned or generated data was produced.
+- `.env` files and virtual environments are ignored by Git. Never put secrets in notebooks or dataset files.
 
-> Ignore rules do not remove files already tracked by Git. If a secret was committed previously, remove it from version control and rotate the credential.
+## Adding a project
 
-## Working with notebooks
-
-- Use descriptive notebook names and include a short purpose statement near the top.
-- Keep exploratory work reproducible: record important assumptions, data sources, and relevant package requirements.
-- Clear bulky or sensitive notebook outputs before sharing.
+Create a descriptive folder for the topic or dataset. Add its notebooks, data-loading or analysis code, and a short explanation of the data source and project purpose. Add any new Python packages to the root `requirements.txt`.
 
 ## License
 
-No repository-wide license has been selected yet. Add a `LICENSE` file before distributing code if you want to grant reuse rights. Dataset licenses and terms may differ from the code license.
+No repository-wide license has been selected. Add a `LICENSE` file before distributing code if you want to grant reuse rights. Dataset licenses and terms may differ from the code license.
